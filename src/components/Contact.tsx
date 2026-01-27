@@ -130,11 +130,11 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
-                {/* <div>
+                <div>
                   <p className="text-sm text-muted-foreground">Phone</p>
                   <p className="text-foreground font-medium">+1 (555) 123-4567</p>
                 </div>
