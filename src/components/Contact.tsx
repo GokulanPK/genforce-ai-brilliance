@@ -110,12 +110,10 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="font-display text-2xl font-semibold mb-4 text-foreground">
-                Let's Talk
-              </h3>
+              <h3 className="font-display text-2xl font-semibold mb-4 text-foreground">Let's Talk</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Whether you have a project in mind or just want to explore possibilities, 
-                we're here to help. Fill out the form and we'll get back to you within 24 hours.
+                Whether you have a project in mind or just want to explore possibilities, we're here to help. Fill out
+                the form and we'll get back to you within 24 hours.
               </p>
             </div>
 
@@ -130,7 +128,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
@@ -138,7 +136,7 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground">Phone</p>
                   <p className="text-foreground font-medium">+1 (555) 123-4567</p>
                 </div>
-              </div> */}
+              </div>
 
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -168,9 +166,7 @@ const Contact = () => {
                 <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
                   <CheckCircle className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-display text-2xl font-semibold mb-3 text-foreground">
-                  ✅ Thank you!
-                </h3>
+                <h3 className="font-display text-2xl font-semibold mb-3 text-foreground">✅ Thank you!</h3>
                 <p className="text-muted-foreground mb-6">
                   Your message has been sent successfully. We will get back to you shortly.
                 </p>
@@ -208,9 +204,7 @@ const Contact = () => {
                       errors.name ? "border-destructive" : ""
                     }`}
                   />
-                  {errors.name && (
-                    <p className="text-destructive text-sm mt-1">{errors.name}</p>
-                  )}
+                  {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
                 </div>
 
                 <div>
@@ -228,9 +222,7 @@ const Contact = () => {
                       errors.email ? "border-destructive" : ""
                     }`}
                   />
-                  {errors.email && (
-                    <p className="text-destructive text-sm mt-1">{errors.email}</p>
-                  )}
+                  {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
                 </div>
 
                 <div>
@@ -248,9 +240,7 @@ const Contact = () => {
                       errors.message ? "border-destructive" : ""
                     }`}
                   />
-                  {errors.message && (
-                    <p className="text-destructive text-sm mt-1">{errors.message}</p>
-                  )}
+                  {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
                 </div>
 
                 <Button
