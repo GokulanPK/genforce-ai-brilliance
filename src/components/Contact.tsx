@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Phone, CheckCircle } from "lucide-react";
+import { Send, Mail, MapPin, Phone, CheckCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,9 +15,11 @@ const contactSchema = z.object({
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const { toast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,6 +33,13 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
+    setSubmitError(false);
+
+    // Honeypot check - if filled, silently reject (bot submission)
+    if (honeypot) {
+      setIsSubmitted(true);
+      return;
+    }
 
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
@@ -46,17 +55,43 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("https://api.staticforms.xyz/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          accessKey: "sf_c81elg615jh2853iaf25n098",
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+          subject: "New Contact Form Submission - Genforce AI Solutions",
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
+      const data = await response.json();
 
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
+      if (data.success) {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+        toast({
+          title: "Message sent!",
+          description: "We'll get back to you as soon as possible.",
+        });
+      } else {
+        throw new Error(data.message || "Submission failed");
+      }
+    } catch (error) {
+      setSubmitError(true);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -154,10 +189,10 @@ const Contact = () => {
                   <CheckCircle className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="font-display text-2xl font-semibold mb-3 text-foreground">
-                  Message Sent!
+                  ✅ Thank you!
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  Thank you for reaching out. We'll get back to you within 24 hours.
+                  Your message has been sent successfully. We will get back to you shortly.
                 </p>
                 <Button
                   onClick={() => setIsSubmitted(false)}
@@ -167,8 +202,41 @@ const Contact = () => {
                   Send Another Message
                 </Button>
               </motion.div>
+            ) : submitError ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="glass-card p-8 text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-destructive/20 flex items-center justify-center mx-auto mb-6">
+                  <X className="w-8 h-8 text-destructive" />
+                </div>
+                <h3 className="font-display text-2xl font-semibold mb-3 text-foreground">
+                  ❌ Something went wrong
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Please try again later or contact us directly via email.
+                </p>
+                <Button
+                  onClick={() => setSubmitError(false)}
+                  variant="outline"
+                  className="border-border hover:bg-secondary/50"
+                >
+                  Try Again
+                </Button>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
+                {/* Honeypot field - hidden from users, catches bots */}
+                <input
+                  type="text"
+                  name="_honeypot"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     Name
