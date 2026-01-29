@@ -3,7 +3,7 @@ import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 
 const socialLinks = [
   // { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  // { icon: Linkedin, href: "#", label: "LinkedIn" },
   { icon: Github, href: "https://github.com/genforceaisolutions", label: "GitHub" },
   // { icon: Instagram, href: "#", label: "Instagram" },
 ];

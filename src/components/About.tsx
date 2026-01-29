@@ -26,10 +26,9 @@ const values = [
 ];
 
 const stats = [
-  { value: 50, suffix: "+", label: "Projects Delivered" },
-  { value: 30, suffix: "+", label: "Happy Clients" },
-  { value: 5, suffix: "+", label: "Years Experience" },
-  { value: 99, suffix: "%", label: "Client Satisfaction" },
+  { value: 10, suffix: "+", label: "Projects Delivered" },
+  { value: 20, suffix: "+", label: "Clients Served" },
+  { value: 1, suffix: "+", label: "Years of Experience" },
 ];
 
 const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
