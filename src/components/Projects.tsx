@@ -1,43 +1,49 @@
 import { motion, Variants } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const projects = [
   {
-    title: "AI Analytics Dashboard",
-    description: "Real-time analytics platform with AI-powered insights, predictive modeling, and automated reporting for enterprise clients.",
-    tags: ["React", "Python", "TensorFlow", "PostgreSQL"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    title: "EdConnect – Mentor Student Collaboration Platform",
+    description: "A web platform that connects students with mentors for guidance, doubt solving, project collaboration, and scheduled mentoring sessions. Includes profile management, chat interaction, and structured learning workflows.",
+    tags: ["React", "Node.js", "MongoDB", "Socket.io"],
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+    github: "https://github.com/yourusername/edconnect",
   },
   {
-    title: "E-Commerce Platform",
-    description: "Full-featured online marketplace with inventory management, payment processing, and customer analytics.",
-    tags: ["Next.js", "Stripe", "Prisma", "Tailwind"],
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    title: "Groww Clone – Stock Trading Platform UI",
+    description: "A frontend replica of a stock trading and investment platform featuring portfolio visualization, live market UI components, stock listings, charts, and modern fintech dashboard layout.",
+    tags: ["React", "Chart.js", "Tailwind", "REST API"],
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+    github: "https://github.com/yourusername/groww-clone",
   },
   {
-    title: "Healthcare SaaS",
-    description: "Patient management system with appointment scheduling, telehealth integration, and secure medical records.",
-    tags: ["TypeScript", "Node.js", "MongoDB", "AWS"],
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
-  },
-  {
-    title: "Fintech Mobile App",
-    description: "Digital banking application with real-time transactions, budgeting tools, and investment tracking.",
-    tags: ["React Native", "Firebase", "Plaid API", "Redux"],
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
-  },
-  {
-    title: "Logistics Platform",
-    description: "Fleet management and route optimization system with real-time tracking and automated dispatch.",
-    tags: ["Vue.js", "Go", "Redis", "MapBox"],
+    title: "AquaEase – Water Delivery Management System",
+    description: "A delivery management platform for ordering, scheduling, and tracking water supply. Includes customer orders, delivery routing, vendor management, and order history tracking.",
+    tags: ["React", "Express", "PostgreSQL", "Maps API"],
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+    github: "https://github.com/yourusername/aquaease",
   },
   {
-    title: "Education Portal",
-    description: "Learning management system with video courses, progress tracking, and interactive assessments.",
-    tags: ["Next.js", "Supabase", "Stripe", "Vercel"],
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
+    title: "AI Assistant – Smart Interface Design",
+    description: "A modern AI assistant UI prototype designed for conversational interaction, clean layouts, animations, and futuristic interface concepts.",
+    tags: ["React", "Framer Motion", "TypeScript", "OpenAI"],
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    github: "https://github.com/yourusername/ai-assistant",
+  },
+  {
+    title: "FoodieVerse – Food Discovery & Recommendation Platform",
+    description: "A food discovery platform that allows users to explore restaurants, cuisines, trending dishes, and personalized food recommendations with rich UI experience.",
+    tags: ["Next.js", "Prisma", "Tailwind", "Zomato API"],
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+    github: "https://github.com/yourusername/foodieverse",
+  },
+  {
+    title: "Nest Verified Living – Property Listing Platform",
+    description: "A real estate platform that connects property owners directly with tenants and buyers, enabling verified listings, property browsing, filtering, and direct communication without brokers.",
+    tags: ["React", "Node.js", "MongoDB", "Cloudinary"],
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+    github: "https://github.com/yourusername/nest-verified-living",
   },
 ];
 
@@ -110,14 +116,17 @@ const Projects = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
                 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                  <Button size="sm" variant="secondary" className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Demo
-                  </Button>
-                  <Button size="sm" variant="secondary" className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0 delay-75">
-                    <Github className="w-4 h-4 mr-2" />
-                    Code
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Button 
+                    size="sm" 
+                    variant="secondary" 
+                    className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0"
+                    asChild
+                  >
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="w-4 h-4 mr-2" />
+                      View on GitHub
+                    </a>
                   </Button>
                 </div>
               </div>
